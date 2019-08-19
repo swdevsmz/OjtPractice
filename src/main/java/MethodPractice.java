@@ -29,7 +29,17 @@ public class MethodPractice {
      * ※ 	平均の計算は整数で行い、小数点以下は切り捨ててよい。
      */
     int average(int... values){
-        return (int)Arrays.stream(values).average().getAsDouble();
+        //// stream版
+        // return (int)Arrays.stream(values).average().getAsDouble();
+
+        // for文版
+        int sum = 0;
+
+        for(int i = 0; i < values.length; i++){
+            sum += values[i];
+        }
+
+        return sum / values.length;
     }
 
     // 練習問題 6 - 3
@@ -38,7 +48,15 @@ public class MethodPractice {
      * また、このメソッドを使用して、int 型の変数 x、y、z にそれぞれ数値を入力し、最も大きい数値を表示するプログラムを作成しなさい。
      */
     int compare(int a, int b){
-        return a > b ? a : b;
+        //// 3項演算子版
+        //return a > b ? a : b;
+
+        // if文版
+        if(a > b){
+            return a;
+        }else{
+            return b;
+        }
     }
 
     // 練習問題 6 - 4
@@ -61,12 +79,19 @@ public class MethodPractice {
      * ※ 	サイズを示す引数は int 型、表示する文字の引数は char 型にする。
      */
     void displayTriangle(int size, char ch){
-        IntStream.rangeClosed(1, size)
-                .forEach(x -> {
-                    IntStream.rangeClosed(1, x)
-                            .forEach( y -> System.out.print(ch));
-                    System.out.println();
-                });
+        // Stream版
+        //IntStream.rangeClosed(1, size)
+        //        .forEach(x -> {
+        //            IntStream.rangeClosed(1, x)
+        //                    .forEach( y -> System.out.print(ch));
+        //            System.out.println();
+        //        });
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j <= i ; j++ )
+                System.out.print( ch );
+            System.out.println();
+        }
     }
 
     // 練習問題 6 - 6
@@ -76,9 +101,14 @@ public class MethodPractice {
      * このメソッドを使用して、九九表を作成しなさい。
      */
     void displayMultiplicationTable(int value){
-        System.out.print(IntStream.rangeClosed(1, 9)
-                .mapToObj(x -> String.valueOf(x * value))
-                .collect(Collectors.joining(" ")));
+       // Stream版
+       // System.out.print(IntStream.rangeClosed(1, 9)
+       //         .mapToObj(x -> String.valueOf(x * value))
+       //         .collect(Collectors.joining(" ")));
+
+        for( int i = 1 ; i <= 9 ; i++ ) {
+            System.out.printf(" %2d", value * i);
+        }
     }
 
     // 練習問題 6 - 7
@@ -113,5 +143,7 @@ public class MethodPractice {
      * 　それぞれの項がその直前の２つの項の和になっている数列のこと。
      * 例：0, 1, 1, 2, 3, 5, 8, 13, 21, ...
      */
+
+
 
 }
